@@ -1,8 +1,3 @@
-Table of contents
-
--   [What is
-    it?](https://docs.goquorum.com/en/latest/Cakeshop/Overview/#what-is-it)
-
 # Cakeshop
 
 An integrated development environment and SDK for Ethereum-like ledgers
