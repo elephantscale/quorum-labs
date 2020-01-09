@@ -18,9 +18,18 @@ Key enhancements over go-ethereum:
 
 The above diagram is a high-level overview of the privacy architecture used by Quorum.
 
+
+# Pre-reqs:
+
+- Lab 1 
+- Lab 2
+
 # 1. Interacting with the Blockchain
 
-1. Run `quorum`, deploy and provision 5nodesRTGS contracts
+Move into following directory:
+`cd /lab/quorum-examples/examples/5nodesRTGS/1-interacting-with-the-blockchain`
+
+1. Run `quorum`, deploy and provision 5nodesRTGS contracts (complete Lab 1 and Lab 2).
 2. Edit app.js and set your ip and port of quorum RPC on line 6
 3. Run `npm install` and `npm install --save connect serve-static`
 4. Run `npm start`. After `bundle.js` is compiled and message is printed. Press `Ctrl+C` to exit.
@@ -30,8 +39,11 @@ The above diagram is a high-level overview of the privacy architecture used by Q
 
 # 2. Interacting with a contracts
 
-1. Run `npm install` and `npm install --save connect serve-static`
-2. Run `raft-init.sh` `raft-start.sh` in the geth node
+Move into following directory:
+`cd /lab/quorum-examples/examples/5nodesRTGS/2-interacting-with-a-contract`
+
+1. Run `raft-init.sh` `raft-start.sh` in the geth node (complete Lab 1 and Lab 2).
+2. Run `npm install` and `npm install --save connect serve-static`
 3. Deploy and provision the contracts following the 5nodesRTGS README, steps 4-10. The HTML file has the same contract addresses of a freshly initiated 5NodesRTGS example, change if necessary
 4. Replace the IP address from lines `5-8` in `app.js` file. 
 5. Run `npm start`. After `bundle.js` is compiled and message is printed. Press `Ctrl+C` to exit.
