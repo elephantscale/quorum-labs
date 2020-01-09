@@ -21,8 +21,8 @@ Getting Started with the Quorum Plugin for Remix
     ![quorum\_tab](./images/tab_icon.png)
 
 4.  Input the Geth RPC url and hit enter. If you are currently running
-    the quorum-examples 7nodes network, the first node’s url is
-    [http://localhost:22000](http://localhost:22000/)
+    the quorum network, the first node’s url is
+    [https://ip:22000](https://ip:22000/)
 
     ![geth\_rpc](./images/geth_rpc.png)
 
