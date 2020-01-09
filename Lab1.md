@@ -5,7 +5,7 @@ Based on Ethereum, Quorum is an open source blockchain platform that combines th
 # Environment
 We will use docker ubuntu for this course.
 
-`docker run -it -p 9615:9615 -p 22000:22000 -p 22001:22001 -p 22002:22002 -p 22003:22003 fenago/ubuntu`
+`docker run -it -p 9615:9615 -p 22000:22000 -p 22001:22001 -p 22002:22002 -p 22003:22003 --name=quorum  fenago/ubuntu`
 
 # Quorum Setup
 
@@ -28,11 +28,28 @@ git clone https://github.com/athertahir/quorum-examples.git
 cd quorum-examples
 cd examples
 cd 5nodesRTGS
+chmod 777 *.sh
 ./bootstrap.sh
 # (run as root, should take some user confirmations, requires internet connection)
 ```
 
+**Note:** You will be prompted to press `ENTER` multiple times during bootstrap.
+
 ## Verify
+
+You will get following output at the end.
+
+```
+ #####
+#     #  #    #   ####   #####   #    #  #    #
+#     #  #    #  #    #  #    #  #    #  ##  ##
+#     #  #    #  #    #  #    #  #    #  # ## #
+#   # #  #    #  #    #  #####   #    #  #    #
+#    #   #    #  #    #  #   #   #    #  #    #
+ #### #   ####    ####   #    #   ####   #    #
+
+Quorum has been installed.
+```
 
 Verify that the setup was successful by running: `geth --help`
 

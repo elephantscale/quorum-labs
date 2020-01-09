@@ -36,21 +36,29 @@ This two phase commit is needed because there is no overdraft protecting in the 
 2- Run "bootstrap.sh" script to install Constellation, GO and Quorum(Already done in previous lab).
  
 ## Quorum set up and start
-1- call raft-init.sh to initialize accounts and keystores
+1- call `./raft-init.sh` to initialize accounts and keystores
 
-2- Bring the 5 nodes up calling start.sh
+2- Bring the 5 nodes up calling  `./raft-start.sh`
 
 3- Connect to the nodes calling:
 
-terminal 1: ``$ geth attach ipc:qdata/dd1/geth.ipc``
+**Note:** If you are running lab in a docker environment, first exec into container in multiple new terminals (You can also get help from annotated lab).
+`docker exec -it quorum /bin/bash`
 
-terminal 2: ``$ geth attach ipc:qdata/dd2/geth.ipc``
+Move into following directory:
+`cd /lab/quorum-examples/examples/5nodesRTGS`
 
-terminal 3: ``$ geth attach ipc:qdata/dd3/geth.ipc``
+And then run in different terminals:
 
-terminal 4: ``$ geth attach ipc:qdata/dd4/geth.ipc``
+terminal 1: ``geth attach ipc:qdata/dd1/geth.ipc``
 
-terminal 5: ``$ geth attach ipc:qdata/dd5/geth.ipc``
+terminal 2: ``geth attach ipc:qdata/dd2/geth.ipc``
+
+terminal 3: ``geth attach ipc:qdata/dd3/geth.ipc``
+
+terminal 4: ``geth attach ipc:qdata/dd4/geth.ipc``
+
+terminal 5: ``geth attach ipc:qdata/dd5/geth.ipc``
 
 Terminal 1-3 are banks 1-3, terminal 4 is the regulator and terminal 5 is the observer used to test privacy.
 
