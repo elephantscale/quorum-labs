@@ -22,7 +22,7 @@ you connect to.
 
 # Running via Docker
 
-Run via docker and access UI on http://localhost:8080/
+Run via docker and access UI on http://localhost:8080/sandbox.html
 
 `docker run -p 8080:8080 quorumengineering/cakeshop`
 
