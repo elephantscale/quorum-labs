@@ -50,3 +50,21 @@ all dependencies. Cakeshop will download the latest version of
 [quorum](https://github.com/jpmorganchase/quorum) and bootnode from
 [geth](https://github.com/ethereum/go-ethereum)
 
+
+
+The linked pages below  provide an overview of each of the Tabs in Cakeshop.  
+
+## [Console](./wiki/Console.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/consoleTab-btn-out.PNG>|Console]]
+## [Console](./wiki/Contracts.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/contractsTab-btn-out.PNG>|]]
+## [Console](./wiki/Sandbox.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandboxTab-btn-out.PNG>|Sandbox]]
+## [Console](./wiki/Chain Explorer.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorerTab-btn-out.PNG>|Chain Explorer]]
+## [Console](./wiki/Wallet.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/walletTab-btn-out.PNG>|Wallet]]
+## [Console](./wiki/Peers.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/peersTab-btn-out.PNG>|Peers]]
+## [Console](./wiki/API.md)
+[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/apiTab-btn-out.PNG>|API]]
