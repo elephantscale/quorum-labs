@@ -3,13 +3,13 @@
 The **Chain Explorer** is where you can find and explore the details of Transactions and Blocks.
 ***
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorer.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorer.png)
 
 ## Widgets & Functionality
 ### 'Block' widget
 <em>Shows the details of the currently selected block.</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/block-widget.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/block-widget.png)
 
 Block attributes displayed (non-exhaustive list):
 * ID
@@ -25,7 +25,7 @@ Block attributes displayed (non-exhaustive list):
 ### 'Block List' widget
 <em>Shows a list of the latest blocks in descending order, including the number of Transactions in each block</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/block-list-widget.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/block-list-widget.png)
 
 ***
 
@@ -33,14 +33,14 @@ Block attributes displayed (non-exhaustive list):
 <em>Provides ability to search for Blocks or Transactions by various IDs.</em>
 
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/find-block-widget.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/find-block-widget.png)
 
 ***
 
 ### 'Transaction' widget
 <em>Shows the details of the currently selected Transaction.</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/transaction-widget.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/transaction-widget.png)
 
 Transaction attributes displayed (non-exhaustive list):
 * Transaction ID

@@ -2,11 +2,11 @@
 Cakeshop comes with a suite of RESTful APIs that make interacting with an Ethereum-like node simple.  The **API** tab provides the full documentation for the APIs that Cakeshop exposes, including example usage and response formats.
 ***
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/api.PNG]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/api.PNG)
 
 ## Sample APIs
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/api-expanded.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/api-expanded.png)
 
 ### block
 * **/block/get**: Retrieve a block by id, number or tag

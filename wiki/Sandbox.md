@@ -2,14 +2,14 @@ The **Sandbox** provides a Solidity Smart Contract compiler, Solidity IDE and RE
 
 The Sandbox is made up of the **Contract Editor** and the **Sandbox Console**.
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-main.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-main.png)
 
 ## Contract Editor
 As expected, the editor is where you write your Solidity Contracts.  You can create new .sol files and view .sol files that are stored in the Cakeshop contract library.
 
 > NOTE: Solidity contracts are currently saved in the browser's local cache.  It is not guaranteed that they will be accessible if you upgrade to a new version of Cakeshop or clear out your browser cache.  You should continue to use standard version management software for your contracts and use Cakeshop primarily as a rapid development environment.
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-editor.PNG]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-editor.PNG)
 
 ## Sandbox Console
 
@@ -22,14 +22,14 @@ It contains:
 * Compiler Output
 * Settings
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-menu.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-menu.png)
 
 
 ### Transaction Playground
 
 <em>The Transaction Playground allows you to deploy your contract code to your network, make calls to contracts and send Transactions to contracts.</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-transaction-panel.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-transaction-panel.png)
 
 ***
 
@@ -37,7 +37,7 @@ It contains:
 
 To deploy a contract to the network, select the relevant file in the editor and then select the relevant contract within that file from the 'Deploy from Editor' widget. The constructor params will be available to populate.
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-deploy2.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-deploy2.png)
 
 **private for**: For Quorum nodes, specify the constellation public key(s) of the counterparties you would like the contract to be private for.
 
@@ -50,11 +50,11 @@ To send a Transaction to a contract, first choose the contract you are intereste
 * Select a contract from the list of deployed contracts
 * Provide the address of the contract you want to call/transact with
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-choose2.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-choose2.png)
 
 Once a contract has been selected, its methods will be displayed in the **Transact** widget, indicating whether they can be called or transacted with:
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sanbox-transact.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sanbox-transact.png)
 
 * **From Address**: choose the Ethereum account to make the call/send the Transaction from.
 * **Private For**: For Quorum nodes, specify the constellation public key(s) of the counterparties you would like the Transaction to be private for.
@@ -64,9 +64,9 @@ Once a contract has been selected, its methods will be displayed in the **Transa
 #### Paper Tape
 <em>View the audit trail of transactions sent to a given contract</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-paper-tape.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-paper-tape.png)
 
-* Clear the Paper Tape within the Sandbox by clicking the [[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/trashcan.PNG]] icon.  This will only clear the local history from the Transaction Playground, nothing will be cleared from the underlying blockchain.
+* Clear the Paper Tape within the Sandbox by clicking the ![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/trashcan.PNG) icon.  This will only clear the local history from the Transaction Playground, nothing will be cleared from the underlying blockchain.
 
 ***
 
@@ -75,18 +75,18 @@ Once a contract has been selected, its methods will be displayed in the **Transa
 
 Selecting a contract from the Contract Library will add it to the Contract Editor.
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/contract-library.PNG]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/contract-library.PNG)
 
 ***
 
 ### Compiler Output
 <em> Real Time compiler of the code that is currently in-focus in the Contract Editor</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/compiler-output.PNG]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/compiler-output.PNG)
 
 ***
 
 ### Sandbox Settings
 <em>Fine tune certain editor settings</em>
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-settings.PNG]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandbox-settings.PNG)

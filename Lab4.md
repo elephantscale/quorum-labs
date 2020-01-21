@@ -52,19 +52,25 @@ all dependencies. Cakeshop will download the latest version of
 
 
 
-The linked pages below  provide an overview of each of the Tabs in Cakeshop.  
+The linked pages below provide an overview of each of the Tabs in Cakeshop.  
 
 ## [Console](./wiki/Console.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/consoleTab-btn-out.PNG>|Console]]
-## [Console](./wiki/Contracts.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/contractsTab-btn-out.PNG>|]]
-## [Console](./wiki/Sandbox.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandboxTab-btn-out.PNG>|Sandbox]]
-## [Console](./wiki/Chain Explorer.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorerTab-btn-out.PNG>|Chain Explorer]]
-## [Console](./wiki/Wallet.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/walletTab-btn-out.PNG>|Wallet]]
-## [Console](./wiki/Peers.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/peersTab-btn-out.PNG>|Peers]]
-## [Console](./wiki/API.md)
-[[<img src=https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/apiTab-btn-out.PNG>|API]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/consoleTab-btn-out.PNG)
+
+## [Contracts](./wiki/Contracts.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/contractsTab-btn-out.PNG)
+
+## [Sandbox](./wiki/Sandbox.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandboxTab-btn-out.PNG)
+
+## [Chain Explorer](./wiki/Chain Explorer.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorerTab-btn-out.PNG)
+
+## [Wallet](./wiki/Wallet.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/walletTab-btn-out.PNG)
+
+## [Peers](./wiki/Peers.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/peersTab-btn-out.PNG)
+
+## [API](./wiki/API.md)
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/apiTab-btn-out.PNG)

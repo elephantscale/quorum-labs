@@ -89,14 +89,14 @@ Although Cakeshop currently has a one-to-one mapping with the underlying Ethereu
     cd node1
     CAKESHOP_SHARED_CONFIG=".." java -jar ../cakeshop.war example
     ```
-2. Assuming you want to attach to an existing node, navigate to /myNetwork/node1/ and edit **application.properties** per the instructions for [['Attach' Mode|Getting Started#attach-mode]] as described above 
+2. Assuming you want to attach to an existing node, navigate to /myNetwork/node1/ and edit **application.properties** per the instructions for ![]('Attach' Mode|Getting Started#attach-mode) as described above 
 
 3. In terminal window 2 run:
     ```
     cd myNetwork/node2
     CAKESHOP_SHARED_CONFIG=".." java -jar ../cakeshop.war example
     ```
-4. Navigate to myNetwork/node2 and edit **application.properties** per the instructions for [['Attach' Mode|Getting Started#attach-mode]] as described above 
+4. Navigate to myNetwork/node2 and edit **application.properties** per the instructions for ![]('Attach' Mode|Getting Started#attach-mode) as described above 
 5. In terminal window 1 run:
 
     ```
@@ -121,4 +121,4 @@ To do so:
 ### Confirming Cakeshop Start Up
 In all cases, Cakeshop will be running once you see the below image, which shows the Cakeshop build and url that you can access that instance of Cakeshop on:
 
-[[https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/happylion.png]]
+![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/happylion.png)
