@@ -63,7 +63,7 @@ The linked pages below provide an overview of each of the Tabs in Cakeshop.
 ## [Sandbox](./wiki/Sandbox.md)
 ![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/sandboxTab-btn-out.PNG)
 
-## [Chain Explorer](./wiki/Chain Explorer.md)
+## [Chain Explorer](./wiki/Chain-Explorer.md)
 ![](https://github.com/jpmorganchase/cakeshop-docs/blob/master/images/explorerTab-btn-out.PNG)
 
 ## [Wallet](./wiki/Wallet.md)
