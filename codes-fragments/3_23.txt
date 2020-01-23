@@ -1,0 +1,11 @@
+var contract_obj = proofContract.at
+  ("0x006c3e992b6e3f52e81560aa3ef6d66e1706b45c"); 
+contract_obj.set.sendTransaction("Enterprise 1",
+   "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    { 
+ from: web3.eth.accounts[0], 
+ privateFor: ['CGXyBlYOGgU4fZ7n8dVLaTW24p+ZOF8kSiUJkQCUABk=']
+}, function(error, transactionHash){ 
+  if (!err) 
+    console.log(transactionHash); 
+}) 

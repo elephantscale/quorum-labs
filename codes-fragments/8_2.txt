@@ -1,0 +1,50 @@
+pragma solidity ^0.4.18;
+
+contract USD {
+    address centralBank;
+
+    mapping (address => uint256) balances;
+    uint256 totalDestroyed;
+    uint256 totalIssued;
+
+    event usdIssued(uint256 amount, address to);
+    event usdDestroyed(uint256 amount, address from);
+    event usdTransferred(uint256 amount, address from, address to,
+      string description);
+
+    function USD() {
+        centralBank = msg.sender;
+    }
+
+    function issueUSD(uint256 amount, address to) {
+        if(msg.sender == centralBank) {
+            balances[to] += amount; 
+            totalIssued += amount;
+            usdIssued(amount, to);
+        }
+    }
+
+    function destroyUSD(uint256 amount) {
+        balances[msg.sender] -= amount;
+        totalDestroyed += amount;
+        usdDestroyed(amount, msg.sender);
+    }
+
+    function transferUSD(uint256 amount, address to, string 
+      description) {
+        if(balances[msg.sender] >= amount) {
+            balances[msg.sender] -= amount;
+            balances[to] += amount;
+            usdTransferred(amount, msg.sender, to, description);
+        }
+    }
+
+    function getBalance(address account) returns (uint256 balance) {
+        return balances[account];
+    }
+
+    function getTotal() returns (uint256 totalDestroyed, uint256 
+      totalIssued) {
+        return (totalDestroyed, totalIssued);
+    }
+}

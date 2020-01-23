@@ -1,0 +1,1 @@
+./geth --datadir qdata/node7 --mine --port 23006 --ipcpath "./geth.ipc" --istanbul.requesttimeout 5000 --istanbul.blockperiod 1 --istanbul.blockpausetime 20 console

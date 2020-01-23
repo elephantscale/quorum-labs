@@ -1,0 +1,27 @@
+app.get("/submit", function(req, res){
+  var fileHash = req.query.hash;
+  var owner = req.query.owner;
+  var pkeys = req.query.pkeys;
+
+  pkeys = pkeys.split(",")
+
+  proof.set.sendTransaction(owner, fileHash, {
+    from: web3.eth.accounts[0],
+    privateFor: pkeys
+  }, function(error, transactionHash){
+    if (!error)
+    {
+      res.send(transactionHash);
+    }
+    else
+    {
+      res.send("Error");
+    }
+  })
+})
+
+app.get("/getInfo", function(req, res) {
+    var fileHash = req.query.hash;
+    var details = proof.get.call(fileHash);
+    res.send(details);
+})

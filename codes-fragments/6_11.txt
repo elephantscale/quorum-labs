@@ -1,0 +1,66 @@
+var request = require("request");
+
+var options = {
+    method: 'POST',
+    url: 'http://127.0.0.1:8000/api/v1/namespaces/default/services',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    body: {
+        kind: 'Service',
+        apiVersion: 'v1',
+        metadata: {
+            name: 'coordinator'
+        },
+        spec: {
+            ports: [{
+                    name: 'remote-communication-node',
+                    port: 50000
+                },
+                {
+                    name: 'communication-node-rpc',
+                    port: 50010
+                },
+                {
+                    name: 'communication-node-ws-rpc',
+                    port: 50020
+                },
+                {
+                    name: 'geth-node',
+                    port: 20000
+                },
+                {
+                    name: 'geth-node-rpc',
+                    port: 20010
+                },
+                {
+                    name: 'geth-node-ws-rpc',
+                    port: 20020
+                },
+                {
+                    name: 'raft-http',
+                    port: 40000
+                },
+                {
+                    name: 'devp2p',
+                    port: 30303
+                },
+                {
+                    name: 'constellation',
+                    port: 9000
+                }
+            ],
+            selector: {
+                app: 'coordinator'
+            },
+            type: 'NodePort'
+        }
+    },
+    json: true
+};
+
+request(options, function(error, response, body) {
+    if (error) throw new Error(error);
+
+    console.log(body);
+});

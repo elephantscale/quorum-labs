@@ -1,0 +1,80 @@
+pragma solidity ^0.4.18;
+
+contract MobileNumbers {
+    address centralBank;
+
+    struct BankDetails {
+        string name;
+        bool authorization;
+    }
+
+    mapping (address => BankDetails) banks;
+    mapping (uint256 => address[]) mobileNumbers;
+
+    event bankAdded(address bankAddress, string bankName);
+    event bankRemoved(address bankAddress);
+    event mobileNumberAdded(address bankAddress, uint256 mobileNumber);
+
+    function MobileNumbers() {
+        centralBank = msg.sender; 
+    }
+
+    function addBank(address bank, string bankName) {
+        if(centralBank == msg.sender) {
+            banks[bank] = BankDetails(bankName, true);
+            bankAdded(bank, bankName);
+        }
+    }
+
+    function removeBank(address bank) {
+        if(centralBank == msg.sender) {
+            banks[bank].authorization = false;
+            bankRemoved(bank);
+        } 
+    }
+
+    function getBankDetails(address bank) view returns (string 
+      bankName, bool authorization) {
+        return (banks[bank].name, banks[bank].authorization);
+    }
+
+    function addMobileNumber(uint256 mobileNumber) {
+        if(banks[msg.sender].authorization == true) {
+            for(uint256 count = 0; count < 
+              mobileNumbers[mobileNumber].length; count++) {
+                if(mobileNumbers[mobileNumber][count] == msg.sender) {
+                    return;
+                }
+            }
+
+            mobileNumbers[mobileNumber].push(msg.sender);
+            mobileNumberAdded(msg.sender, mobileNumber);
+        }
+    }
+
+    function removeMobileNumber(uint256 mobileNumber) {
+        if(banks[msg.sender].authorization == true) {
+            for(uint256 count = 0; count < 
+              mobileNumbers[mobileNumber].length; count++) {
+                if(mobileNumbers[mobileNumber][count] == msg.sender) {
+                    delete mobileNumbers[mobileNumber][count];
+
+                    //fill the gap caused by delete
+                    for (uint i = count; i < 
+                      mobileNumbers[mobileNumber].length - 1; i++){
+                        mobileNumbers[mobileNumber][i] = 
+                          mobileNumbers[mobileNumber][i+1];
+                    }
+                    mobileNumbers[mobileNumber].length--;
+
+                    break;
+                }
+            }
+        }
+    }
+
+    function getMobileNumberBanks(uint256 mobileNumber) view returns
+     (address[] banks) {
+        return mobileNumbers[mobileNumber];
+    }
+}

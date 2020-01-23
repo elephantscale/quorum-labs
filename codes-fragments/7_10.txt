@@ -1,0 +1,141 @@
+let emr = JSON.stringify({
+  "Blood Group": "O+",
+  "type": "Blood Report"
+});
+let emrHash = sha256(emr);
+
+let data = healthContractInstance.addEMR.getData
+  (patient_wallet.getAddressString(), emrHash);
+let nonce = web3.eth.getTransactionCount
+  (hospital_wallet.getAddressString())
+
+let rawTx = {
+  gasPrice: web3.toHex(web3.eth.gasPrice),
+  gasLimit: web3.toHex(4700000),
+  from: hospital_wallet.getAddressString(),
+  nonce: web3.toHex(nonce),
+  data: data,
+  to: contract.address
+};
+
+let privateKey = ethereumjsUtil.toBuffer("0x" + hospital_wallet.getPrivateKey().toString('hex'), 'hex');
+let tx = new ethereumjsTx(rawTx);
+tx.sign(privateKey);
+
+web3.eth.sendRawTransaction("0x" + tx.serialize().toString('hex'),
+   function(error, result) {
+  if (error) {
+    console.log(error)
+  } else {
+    //Generate Public Key like npre. It's compressed and has a 
+    //extra character 0x01 in beginning
+    let compressedPublicKey = Buffer.concat
+      ([new Buffer([0x01]), Buffer.from(EthCrypto.publicKey.compress
+      (patient_wallet.getPublicKey().toString("hex")),
+      'hex')]).toString("base64")
+
+    exec('python3 ./encrypt.py ' + compressedPublicKey + " '" + 
+      emr + "'", (error, stdout, stderr) => {
+      if (error !== null) {
+        console.log(error)
+      } else {
+        //Assume we are pushing encrypted data to proxy 
+        //re-encryption server
+        let encryptedEMR = stdout.substr(2).slice(0, -2);
+        console.log("Encrypted Message: " + encryptedEMR)
+
+        //Assume that proxy re-encryption server re-encrypting
+        // data when requested by authorized service provider
+        exec('python3 ./re_encrypt.py ' + reEncKey + " " +
+          encryptedEMR, (error, stdout, stderr) => {
+          if (error !== null) {
+            console.log(error)
+          } else {
+            let reEncryptedEMR = stdout.substr(2).slice(0, -2)
+            console.log("Re-Encrypted Message: " + reEncryptedEMR)
+
+            //Assume service provider decrypting the re-encrypted 
+            //data provided by the proxy re-encryption server
+            exec('python3 ./decrypt.py ' + secKeyB + " " +
+              reEncryptedEMR, (error, stdout, stderr) => {
+              if (error) {
+                console.log(error)
+              } else {
+                let decrypted_message = stdout.substr(2).slice(0, -2)
+
+                console.log("Decrypted Message: " + decrypted_message)
+
+                //Generate a new key for patient
+                let new_patient_wallet = ethereumjsWallet.generate();
+
+                let secKeyA = Buffer.concat([new Buffer([0x00]),
+                  patient_wallet.getPrivateKey()]).toString('base64')
+                let secKeyB = Buffer.concat
+                  ([new Buffer([0x00]),
+                   new_patient_wallet.getPrivateKey()]
+                   ).toString('base64')
+
+                exec('python3 ./generate_reEncKey.py ' + secKeyA + " "
+                  + secKeyB, (error, stdout, stderr) => {
+                  if (error !== null) {
+                    console.log(error)
+                  } else {
+                    let reEncKey = stdout.substr(2).slice(0, -2)
+
+                    console.log("Re-encryption Key for Patient's new
+                      Wallet: " + reEncKey)
+
+                    //Change patient's key
+                    let data = healthContractInstance.
+                      changePatientAccount.getData
+                      (reEncKey, new_patient_wallet.getAddressString(),
+                      new_patient_wallet.getPublicKey().
+                      toString('hex'));
+                    let nonce = web3.eth.getTransactionCount
+                      (patient_wallet.getAddressString())
+
+                    let rawTx = {
+                      gasPrice: web3.toHex(web3.eth.gasPrice),
+                      gasLimit: web3.toHex(4700000),
+                      from: patient_wallet.getAddressString(),
+                      nonce: web3.toHex(nonce),
+                      data: data,
+                      to: contract.address
+                    };
+
+                    let privateKey = ethereumjsUtil.toBuffer("0x" +
+                      patient_wallet.getPrivateKey().toString
+                      ('hex'), 'hex');
+                    let tx = new ethereumjsTx(rawTx);
+                    tx.sign(privateKey);
+
+                    web3.eth.sendRawTransaction("0x" +
+                      tx.serialize().toString('hex'), 
+                      function(error, result) {
+                      if (error) {
+                        console.log(error)
+                      } else {
+                        let events = healthContractInstance.allEvents({
+                          fromBlock: 0,
+                          toBlock: 'latest'
+                        });
+                        events.get(function(error, logs) {
+                          for (let count = 0; count < logs.length;
+                            count++) {
+                            console.log("Event Name: " +
+                              logs[count].event + " and Args: " +
+                              JSON.stringify(logs[count].args))
+                          }
+                        });
+                      }
+                    })
+                  }
+                })
+              }
+            })
+          }
+        })
+      }
+    });
+  }
+})

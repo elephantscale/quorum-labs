@@ -1,0 +1,73 @@
+var generateSecret = function () {
+    return Math.random().toString(36).substr(2, 9);
+};
+
+var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
+var RBI_Address = "0x92764a01c43ca175c0d2de145947d6387205c655";
+var FRS_Address = "0xbc37e7ba9f099ba8c61532c6fce157072798fe77";
+var BOA_Address = "0x104803ea6d8696afa6e7a284a46a1e71553fcf12";
+var ICICI_Address = "0x84d2dab0d783dd84c40d04692e303b19fa49bf47";
+
+var usdContract_ABI = /* Put JSON here */;
+var usdContract_Bytecode = "0x606..."
+var atomicswapUSD_ABI = /* Put JSON here */;
+var atomicswapUSD_Bytecode = "0x606..."
+var inrContract_ABI = /* Put JSON here */;
+var inrContract_Bytecode = "0x606..."
+var atomicswapINR_ABI = /* Put JSON here */;
+var atomicswapINR_Bytecode = "0x606..."
+
+var usdContract = web3.eth.contract(usdContract_ABI);
+var usd = usdContract.new({
+  from: FRS_Address, 
+   data: usdContract_Bytecode, 
+   gas: "4700000"
+}, function (e, contract){
+  if (typeof contract.address !== 'undefined') {
+    var usdContractAddress = contract.address;
+    var usdContractInstance = usdContract.at(usdContractAddress)
+    var atomicswap_usdContract = web3.eth.contract(atomicswapUSD_ABI);
+    var atomicswap_usd = atomicswap_usdContract.new(usdContractAddress, {
+        from: FRS_Address, 
+        data: atomicswapUSD_Bytecode, 
+        gas: "4700000"
+    }, function (e, contract){
+        if (typeof contract.address !== 'undefined') {
+            var atomicSwapUSDAddress = contract.address;
+            var atomicSwapUSDContractInstance =
+              atomicswap_usdContract.at(atomicSwapUSDAddress);
+
+            var inrContract = web3.eth.contract(inrContract_ABI);
+
+        var inr = inrContract.new({
+            from: RBI_Address, 
+            data: inrContract_Bytecode, 
+            gas: "4700000"
+        }, function (e, contract){
+            if(typeof contract.address !== 'undefined') {
+                var inrContractAddress = contract.address;
+                var inrContractInstance = 
+                  inrContract.at(inrContractAddress)
+            var atomicswap_inrContract =
+              web3.eth.contract(atomicswapINR_ABI);
+            var atomicswap_inr = atomicswap_inrContract.new(
+                inrContractAddress, {
+                from: RBI_Address, 
+                data: atomicswapINR_Bytecode, 
+                gas: '4700000'
+            }, function (e, contract){
+                if (typeof contract.address !== 'undefined') {
+                    var atomicSwapINRAddress = contract.address;
+                    var atomicSwapINRContractInstance = 
+                      atomicswap_inrContract.at(atomicSwapINRAddress);
+
+
+                }
+            })
+            }
+        })
+        }
+    })
+  }
+})

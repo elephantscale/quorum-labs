@@ -1,0 +1,129 @@
+//Generate Service Provider's Keys
+let hospital_wallet = ethereumjsWallet.generate();
+
+//Register the Service Provider on blockchain
+let data = healthContractInstance.addServiceProvider.getData
+  (hospital_wallet.getPublicKey().toString('hex'));
+let nonce = web3.eth.getTransactionCount
+  (hospital_wallet.getAddressString())
+
+let rawTx = {
+  gasPrice: web3.toHex(web3.eth.gasPrice),
+  gasLimit: web3.toHex(4700000),
+  from: hospital_wallet.getAddressString(),
+  nonce: web3.toHex(nonce),
+  data: data,
+  to: contract.address
+};
+
+let privateKey = ethereumjsUtil.toBuffer("0x" +
+   hospital_wallet.getPrivateKey().toString('hex'), 'hex');
+let tx = new ethereumjsTx(rawTx);
+tx.sign(privateKey);
+
+web3.eth.sendRawTransaction("0x" + tx.serialize().toString('hex'),
+  function(error, result) {
+  if (error) {
+    console.log(error)
+  } else {
+    console.log("Hospital Pub Key: " +
+      healthContractInstance.getServiceProviderPublicKey.call
+      (hospital_wallet.getAddressString()))
+
+    let token = "yr238932";
+    let tokenHash = "0x" + sha256(token);
+
+    //Generate private key like npre. It has a extra character 0x00 
+    //in beginning
+    let secKeyA = Buffer.concat([new Buffer([0x00]),
+      patient_wallet.getPrivateKey()]).toString('base64')
+    //Generate another private key to share with service provider
+    let temp_wallet = ethereumjsWallet.generate();
+    let secKeyB = Buffer.concat([new Buffer([0x00]),
+      temp_wallet.getPrivateKey()]).toString('base64')
+
+    exec('python3 ./generate_reEncKey.py ' + secKeyA + " " + secKeyB,
+      (error, stdout, stderr) => {
+      if (error !== null) {
+        console.log(error)
+      } else {
+        let reEncKey = stdout.substr(2).slice(0, -2)
+
+        console.log("Re-Encryption Key: " + reEncKey)
+
+        //Add token to blockchain
+        let data = healthContractInstance.addToken.getData
+          (tokenHash, true, true, reEncKey);
+        let nonce = web3.eth.getTransactionCount
+          (patient_wallet.getAddressString())
+
+        let rawTx = {
+          gasPrice: web3.toHex(web3.eth.gasPrice),
+          gasLimit: web3.toHex(4700000),
+          from: patient_wallet.getAddressString(),
+          nonce: web3.toHex(nonce),
+          data: data,
+          to: contract.address
+        };
+
+        let privateKey = ethereumjsUtil.toBuffer("0x" + 
+          patient_wallet.getPrivateKey().toString('hex'), 'hex');
+        let tx = new ethereumjsTx(rawTx);
+        tx.sign(privateKey);
+
+        web3.eth.sendRawTransaction("0x" + 
+          tx.serialize().toString('hex'), 
+          function(error, result) {
+          if (error) {
+            console.log(error)
+          } else {
+            console.log("Token Info: " + 
+              healthContractInstance.getToken.call
+              (patient_wallet.getAddressString(), tokenHash, {
+              from: patient_wallet.getAddressString()
+            }))
+
+            //Get access to patient's data
+            let data = 
+              healthContractInstance.requestAccess.getData
+              (token, patient_wallet.getAddressString());
+            let nonce = web3.eth.getTransactionCount
+              (hospital_wallet.getAddressString())
+
+            let rawTx = {
+              gasPrice: web3.toHex(web3.eth.gasPrice),
+              gasLimit: web3.toHex(4700000),
+              from: hospital_wallet.getAddressString(),
+              nonce: web3.toHex(nonce),
+              data: data,
+              to: contract.address
+            };
+
+            let privateKey = ethereumjsUtil.toBuffer("0x" +
+              hospital_wallet.getPrivateKey().toString('hex'),
+              'hex');
+            let tx = new ethereumjsTx(rawTx);
+            tx.sign(privateKey);
+
+            web3.eth.sendRawTransaction("0x" + 
+              tx.serialize().toString('hex'), 
+              function(error, result) {
+              if (error) {
+                console.log(error)
+              } else {
+                console.log("Permission Info: " +
+                  healthContractInstance.getPermission.call
+                  (patient_wallet.getAddressString(), 
+                  hospital_wallet.getAddressString(), {
+                  from: hospital_wallet.getAddressString()
+                }))
+
+
+              }
+            })
+          }
+        })
+      }
+    })
+  }
+})

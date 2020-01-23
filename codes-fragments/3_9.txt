@@ -1,0 +1,5 @@
+if(x != y) { revert(); }
+
+//In assert() and require(), the conditional statement is an inversion //to "if" block's condition, switching the comparison operator != to ==
+assert(x == y);
+require(x == y);

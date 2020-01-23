@@ -1,0 +1,63 @@
+let Web3 = require("web3");
+let ethereumjsWallet = require("ethereumjs-wallet")
+let ethereumjsUtil = require("ethereumjs-util");
+let ethereumjsTx = require("ethereumjs-tx");
+let sha256 = require("sha256");
+let EthCrypto = require('eth-crypto');
+let exec = require("child_process").exec;
+
+let web3 = new Web3(new 
+  Web3.providers.HttpProvider("http://localhost:8545"));
+
+let healthContract = web3.eth.contract([]);
+let health = healthContract.new({
+  from: web3.eth.accounts[0],
+  data: '0x608060aa31862e....',
+  gas: '4700000'
+}, function(e, contract) {
+  if (typeof contract.address !== 'undefined') {
+    let healthContractInstance = healthContract.at(contract.address);
+
+    //Generate Patient's Keys
+    let patient_wallet = ethereumjsWallet.generate();
+
+    //Register the Patient on blockchain.
+    let data = healthContractInstance.addPatient.getData
+      (patient_wallet.getPublicKey().toString('hex'));
+    let nonce = web3.eth.getTransactionCount
+      (patient_wallet.getAddressString())
+
+    let rawTx = {
+      gasPrice: web3.toHex(web3.eth.gasPrice),
+      gasLimit: web3.toHex(4700000),
+      from: patient_wallet.getAddressString(),
+      nonce: web3.toHex(nonce),
+      data: data,
+      to: contract.address
+    };
+
+    let privateKey = ethereumjsUtil.toBuffer("0x" +
+      patient_wallet.getPrivateKey().toString('hex'), 'hex');
+    let tx = new ethereumjsTx(rawTx);
+    tx.sign(privateKey);
+
+    web3.eth.sendRawTransaction("0x" + tx.serialize().toString('hex'),
+      function(error, result) {
+      if (error) {
+        console.log(error)
+        res.status(500).send({
+          error: "An error occured"
+        })
+      } else {
+        console.log("Patient Pub Key: " +  
+          healthContractInstance.getPatientPublicKey.call
+          (patient_wallet.getAddressString()))
+
+        //Generate Service Provider's Keys
+        let hospital_wallet = ethereumjsWallet.generate();
+
+        //continue from here
+      }
+    })
+  }
+})

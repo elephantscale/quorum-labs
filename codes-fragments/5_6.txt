@@ -1,0 +1,77 @@
+//Issue USD
+usdContractInstance.issueUSD.sendTransaction(BOA_Address, 1000,
+  {from: FRS_Address}, function(e, txnHash){
+
+  //Fetch USD Balance
+  console.log("Bank of America's USD Balance is : " + 
+    usdContractInstance.getUSDBalance.call(BOA_Address).toString())
+
+  //Issue INR
+  inrContractInstance.issueINR.sendTransaction(ICICI_Address, 1000,
+   {from: RBI_Address}, function(e, txnHash){
+
+    //Fetch INR Balance
+    console.log("ICICI Bank's INR Balance is : " + 
+      inrContractInstance.getINRBalance.call(ICICI_Address).toString())
+
+    //Generate Secret and Hash
+    var secret = generateSecret();
+    var hash = atomicSwapUSDContractInstance.calculateHash.call(secret,
+      {from: BOA_Address});
+
+    //Give Access to Smart Contract
+    usdContractInstance.approve.sendTransaction(atomicSwapUSDAddress,
+      1000, {from: BOA_Address}, function(e, txnHash){
+
+      //Give Access to Smart Contract
+      inrContractInstance.approve.sendTransaction(atomicSwapINRAddress,
+        1000, {from: ICICI_Address}, function(e, txnHash){
+
+        //Lock 1000 USD for 30 min
+        atomicSwapUSDContractInstance.lock.sendTransaction(ICICI_Address, hash, 
+  30, 1000, {from: BOA_Address, gas: 4712388}, function(e, txnHash){
+
+          //Fetch USD Balance
+          console.log("USD Atomic Exchange Smart Contracts holds : " + 
+            usdContractInstance.getUSDBalance.call
+            (atomicSwapUSDAddress).toString())
+
+          //Lock 1000 INR for 15 min
+          atomicSwapINRContractInstance.lock.sendTransaction(BOA_Address,
+  hash, 15, 1000, {from: ICICI_Address, gas: 4712388},
+  function(e, txnHash){
+
+            //Fetch INR Balance
+            console.log("INR Atomic Exchange Smart Contracts holds : "
+              + inrContractInstance.getINRBalance.call
+              (atomicSwapINRAddress).toString())
+
+            atomicSwapINRContractInstance.claim(secret, {
+              from: BOA_Address, gas: 4712388
+            }, function(error, txnHash){
+
+              //Fetch INR Balance
+              console.log("Bank of America's INR Balance is : " +
+                inrContractInstance.getINRBalance.call
+                (BOA_Address).toString())
+
+              atomicSwapUSDContractInstance.claim(secret, {
+                from: ICICI_Address, gas: 4712388
+              }, function(error, txnHash){
+
+                //Fetch USD Balance
+                console.log("ICICI Bank's USD Balance is : " +
+                  usdContractInstance.getUSDBalance.call
+                  (ICICI_Address).toString())
+              })
+
+            })
+
+          })
+        })
+      })
+
+    })
+  })
+
+}) 
