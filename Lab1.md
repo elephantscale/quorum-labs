@@ -5,6 +5,9 @@ Based on Ethereum, Quorum is an open source blockchain platform that combines th
 # Environment
 We will use docker ubuntu for this course.
 
+If you lab machine does not have docker, follow [these instructions](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-16-04)
+to install it.
+
 `docker run -it -p 9615:9615 -p 22000:22000 -p 22001:22001 -p 22002:22002 -p 22003:22003 --name=quorum  fenago/ubuntu`
 
 # Quorum Setup
